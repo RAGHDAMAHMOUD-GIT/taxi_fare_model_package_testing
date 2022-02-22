@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/raghda/code/RAGHDAMAHMOUD-GIT/TaxiFareModel/mlruns/1/6e0c79964c7340d2b47a4c6543e31ff0/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: 6e0c79964c7340d2b47a4c6543e31ff0
+run_uuid: 6e0c79964c7340d2b47a4c6543e31ff0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1645572089283
+status: 1
+tags: []
+user_id: unknown
