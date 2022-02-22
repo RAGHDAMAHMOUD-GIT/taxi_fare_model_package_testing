@@ -1,25 +1,23 @@
-from sklearn.base import BaseEstimator, TransformerMixin
 import pandas as pd
+from sklearn.base import BaseEstimator, TransformerMixin
 from TaxiFareModel.utils import haversine_vectorized
-from TaxiFareModel.data import get_data
 
 
 class TimeFeaturesEncoder(BaseEstimator, TransformerMixin):
-    """Extract the day of week (dow), the hour, the month and the year from a
-    time column."""
+    """
+        Extract the day of week (dow), the hour, the month and the year from a time column.
+        Returns a copy of the DataFrame X with only four columns: 'dow', 'hour', 'month', 'year'
+    """
 
     def __init__(self, time_column, time_zone_name='America/New_York'):
         self.time_column = time_column
         self.time_zone_name = time_zone_name
 
     def fit(self, X, y=None):
-        self.X = X
-        self.y = y
         return self
 
     def transform(self, X, y=None):
         assert isinstance(X, pd.DataFrame)
-        self.y = y
         X_ = X.copy()
         X_.index = pd.to_datetime(X[self.time_column])
         X_.index = X_.index.tz_convert(self.time_zone_name)
@@ -31,7 +29,10 @@ class TimeFeaturesEncoder(BaseEstimator, TransformerMixin):
 
 
 class DistanceTransformer(BaseEstimator, TransformerMixin):
-    """Compute the haversine distance between two GPS points."""
+    """
+        Compute the haversine distance between two GPS points.
+        Returns a copy of the DataFrame X with only one column: 'distance'
+    """
 
     def __init__(self,
                  start_lat="pickup_latitude",
@@ -44,13 +45,10 @@ class DistanceTransformer(BaseEstimator, TransformerMixin):
         self.end_lon = end_lon
 
     def fit(self, X, y=None):
-        self.X = X
-        self.y = y
         return self
 
     def transform(self, X, y=None):
         assert isinstance(X, pd.DataFrame)
-        self.y = y
         X_ = X.copy()
         X_["distance"] = haversine_vectorized(
             X_,
